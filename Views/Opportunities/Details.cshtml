@@ -1,0 +1,46 @@
+
+@model AcxiomCRM.Models.Opportunity
+
+@{
+    ViewData["Title"] = "Opportunity Details";
+}
+
+<h2 class="mb-3">Opportunity Details</h2>
+
+<div class="card shadow-sm p-4">
+    <dl class="row">
+        <dt class="col-sm-3">Opportunity Name</dt>
+        <dd class="col-sm-9">@Model.OpportunityName</dd>
+
+        <dt class="col-sm-3">Customer</dt>
+        <dd class="col-sm-9">@Model.CustomerName</dd>
+
+        <dt class="col-sm-3">Company</dt>
+        <dd class="col-sm-9">@Model.CompanyName</dd>
+
+        <dt class="col-sm-3">Deal Value</dt>
+        <dd class="col-sm-9">₹@Model.DealValue.ToString("N2")</dd>
+
+        <dt class="col-sm-3">Stage</dt>
+        <dd class="col-sm-9">@Model.Stage</dd>
+
+        <dt class="col-sm-3">Status</dt>
+        <dd class="col-sm-9">@Model.Status</dd>
+
+        <dt class="col-sm-3">Expected Close Date</dt>
+        <dd class="col-sm-9">@Model.ExpectedCloseDate.ToString("dd MMM yyyy")</dd>
+
+        <dt class="col-sm-3">Description</dt>
+        <dd class="col-sm-9">@Model.Description</dd>
+
+        <dt class="col-sm-3">Created Date</dt>
+        <dd class="col-sm-9">@Model.CreatedDate.ToString("dd MMM yyyy")</dd>
+    </dl>
+
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id"
+           class="btn btn-primary">Edit</a>
+
+        <a asp-action="Index" class="btn btn-secondary">Back</a>
+    </div>
+</div>

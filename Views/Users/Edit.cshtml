@@ -1,0 +1,56 @@
+
+@model AcxiomCRM.Controllers.EditUserViewModel
+
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<div class="mb-4">
+    <h2>Edit User</h2>
+    <p class="text-muted">Update user information and permissions.</p>
+</div>
+
+<div class="card shadow-sm p-4">
+
+    <form asp-controller="Users" asp-action="Edit" method="post">
+
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" name="id" value="@Model.Id" />
+
+        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label class="form-label">Email Address</label>
+            <input type="email" name="email"
+                   value="@Model.Email"
+                   class="form-control"
+                   required />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">User Role</label>
+            <select name="role" class="form-select">
+                <option value="Employee"
+                        selected="@(Model.Role == "Employee")">
+                    Employee
+                </option>
+                <option value="Admin"
+                        selected="@(Model.Role == "Admin")">
+                    Admin
+                </option>
+            </select>
+        </div>
+
+        <div class="alert alert-info">
+            Password is not changed when editing user details.
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            <i class="bi bi-check-circle"></i> Update User
+        </button>
+
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+
+    </form>
+</div>

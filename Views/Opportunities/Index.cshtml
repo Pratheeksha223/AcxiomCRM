@@ -1,0 +1,92 @@
+
+@model IEnumerable<AcxiomCRM.Models.Opportunity>
+
+@{
+    ViewData["Title"] = "Opportunities";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2>Opportunity Management</h2>
+        <p class="text-muted">Manage and track your business opportunities.</p>
+    </div>
+    <a asp-action="Create" class="btn btn-success">
+        <i class="bi bi-plus-lg"></i> Add Opportunity
+    </a>
+</div>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<div class="card shadow-sm p-3">
+    <form asp-action="Index" method="get" class="d-flex mb-3 gap-2">
+        <input type="text" name="searchString"
+               class="form-control"
+               placeholder="Search opportunity, customer or company..."
+               value="@Context.Request.Query["searchString"]" />
+        <button type="submit" class="btn btn-success">Search</button>
+        <a asp-action="Index" class="btn btn-outline-secondary">Clear</a>
+    </form>
+
+    <div class="table-responsive">
+        <table class="table table-hover align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>ID</th>
+                    <th>Opportunity</th>
+                    <th>Customer</th>
+                    <th>Company</th>
+                    <th>Deal Value</th>
+                    <th>Stage</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Any())
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td><strong>@item.OpportunityName</strong></td>
+                            <td>@item.CustomerName</td>
+                            <td>@item.CompanyName</td>
+                            <td>₹@item.DealValue.ToString("N2")</td>
+                            <td>@item.Stage</td>
+                            <td>
+                                <span class="badge bg-success">@item.Status</span>
+                            </td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.Id"
+                                   class="btn btn-sm btn-outline-info" title="View">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+
+                                <a asp-action="Edit" asp-route-id="@item.Id"
+                                   class="btn btn-sm btn-outline-primary" title="Edit">
+                                    <i class="bi bi-pencil"></i>
+                                </a>
+
+                                <a asp-action="Delete" asp-route-id="@item.Id"
+                                   class="btn btn-sm btn-outline-danger" title="Delete">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="8" class="text-center text-muted p-4">
+                            No opportunities found. Add your first opportunity!
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+
+@model AcxiomCRM.Models.Activity
+
+@{
+    ViewData["Title"] = "Add Activity";
+}
+
+<div class="mb-4">
+    <h2>Add New Activity</h2>
+    <p class="text-muted">Record and manage customer interactions.</p>
+</div>
+
+<div class="card shadow-sm p-4">
+
+    <form asp-controller="Activities"
+          asp-action="Create"
+          method="post">
+
+        @Html.AntiForgeryToken()
+
+        <div asp-validation-summary="ModelOnly"
+             class="text-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="ActivityName" class="form-label">
+                Activity Name
+            </label>
+            <input asp-for="ActivityName"
+                   class="form-control"
+                   placeholder="Enter activity name" />
+            <span asp-validation-for="ActivityName"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CustomerName" class="form-label">
+                Customer Name
+            </label>
+            <input asp-for="CustomerName"
+                   class="form-control"
+                   placeholder="Enter customer name" />
+            <span asp-validation-for="CustomerName"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Type" class="form-label">
+                Activity Type
+            </label>
+            <select asp-for="Type" class="form-select">
+                <option value="Call">Call</option>
+                <option value="Meeting">Meeting</option>
+                <option value="Email">Email</option>
+                <option value="Demo">Demo</option>
+                <option value="Other">Other</option>
+            </select>
+            <span asp-validation-for="Type"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ActivityDate" class="form-label">
+                Activity Date
+            </label>
+            <input asp-for="ActivityDate"
+                   type="datetime-local"
+                   class="form-control" />
+            <span asp-validation-for="ActivityDate"
+                  class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Status" class="form-label">
+                Status
+            </label>
+            <select asp-for="Status" class="form-select">
+                <option value="Pending">Pending</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancelled">Cancelled</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">
+                Description
+            </label>
+            <textarea asp-for="Description"
+                      class="form-control"
+                      rows="4"
+                      placeholder="Enter activity details"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            <i class="bi bi-check-circle"></i> Save Activity
+        </button>
+
+        <a asp-action="Index" class="btn btn-secondary">
+            Cancel
+        </a>
+
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

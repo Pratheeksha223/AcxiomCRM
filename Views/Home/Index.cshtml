@@ -1,0 +1,182 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="dashboard-heading">
+    <div>
+        <h2>Dashboard Overview</h2>
+        <p>Welcome back! Here's what's happening with your business.</p>
+    </div>
+    <span class="date-label">
+        <i class="bi bi-calendar3"></i>
+        Business Overview
+    </span>
+</div>
+
+<div class="row g-3 mb-4">
+
+    <div class="col-xl-3 col-md-6">
+        <div class="stat-card">
+            <div class="stat-top">
+                <span>Total Customers</span>
+                <i class="bi bi-people stat-icon teal"></i>
+            </div>
+            <h3>120</h3>
+            <small>Customer records</small>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="stat-card">
+            <div class="stat-top">
+                <span>Total Leads</span>
+                <i class="bi bi-person-lines-fill stat-icon blue"></i>
+            </div>
+            <h3>85</h3>
+            <small>Potential customers</small>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="stat-card">
+            <div class="stat-top">
+                <span>Open Opportunities</span>
+                <i class="bi bi-briefcase stat-icon orange"></i>
+            </div>
+            <h3>32</h3>
+            <small>Active sales deals</small>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="stat-card">
+            <div class="stat-top">
+                <span>Won Opportunities</span>
+                <i class="bi bi-trophy stat-icon green"></i>
+            </div>
+            <h3>18</h3>
+            <small>Successfully closed deals</small>
+        </div>
+    </div>
+
+</div>
+
+<div class="row g-3 mb-4">
+
+    <div class="col-lg-8">
+        <div class="dashboard-panel">
+            <h5>Sales Pipeline</h5>
+            <p class="panel-description">Opportunity distribution by stage</p>
+
+            <canvas id="salesChart" height="115"></canvas>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="dashboard-panel">
+            <h5>Lead Status</h5>
+            <p class="panel-description">Lead distribution</p>
+
+            <canvas id="leadChart" height="220"></canvas>
+        </div>
+    </div>
+
+</div>
+
+<div class="dashboard-panel">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h5>Recent Activities</h5>
+            <p class="panel-description mb-0">
+                Latest CRM activities
+            </p>
+        </div>
+        <span class="status-badge">Demo data</span>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>Activity</th>
+                    <th>Customer</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Product discussion</td>
+                    <td>ABC Technologies</td>
+                    <td>Meeting</td>
+                    <td><span class="badge bg-success">Completed</span></td>
+                </tr>
+                <tr>
+                    <td>Follow-up call</td>
+                    <td>Global Solutions</td>
+                    <td>Call</td>
+                    <td><span class="badge bg-warning text-dark">Pending</span></td>
+                </tr>
+                <tr>
+                    <td>New sales inquiry</td>
+                    <td>Bright Enterprises</td>
+                    <td>Email</td>
+                    <td><span class="badge bg-primary">New</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        new Chart(document.getElementById('salesChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Qualification', 'Proposal', 'Negotiation', 'Won', 'Lost'],
+                datasets: [{
+                    label: 'Opportunities',
+                    data: [12, 19, 8, 18, 5],
+                    backgroundColor: '#0eaa91',
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+
+        new Chart(document.getElementById('leadChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['New', 'Contacted', 'Qualified', 'Lost'],
+                datasets: [{
+                    data: [25, 30, 20, 10],
+                    backgroundColor: [
+                        '#0eaa91',
+                        '#4385df',
+                        '#f2a64a',
+                        '#e36d75'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    </script>
+}

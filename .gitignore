@@ -1,0 +1,16 @@
+
+bin/
+obj/
+.vs/
+*.user
+*.suo
+
+# SQLite database files
+*.db
+*.db-shm
+*.db-wal
+
+# Development settings and secrets
+appsettings.Development.json
+.env
+.env.*

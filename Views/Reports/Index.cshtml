@@ -1,0 +1,73 @@
+
+@{
+    ViewData["Title"] = "Reports";
+}
+
+<div class="container-fluid">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold">Business Reports</h2>
+            <p class="text-muted">Overview of your CRM performance</p>
+        </div>
+        <button class="btn btn-success" onclick="window.print()">
+            <i class="bi bi-download"></i> Export / Print Report
+        </button>
+    </div>
+
+    <div class="row g-3 mb-4">
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 p-3">
+                <h6 class="text-muted">Total Customers</h6>
+                <h2 class="fw-bold text-primary">@ViewBag.TotalCustomers</h2>
+                <small>Registered customers</small>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 p-3">
+                <h6 class="text-muted">Total Leads</h6>
+                <h2 class="fw-bold text-info">@ViewBag.TotalLeads</h2>
+                <small>Potential customers</small>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 p-3">
+                <h6 class="text-muted">Opportunities</h6>
+                <h2 class="fw-bold text-warning">@ViewBag.TotalOpportunities</h2>
+                <small>Business opportunities</small>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow-sm border-0 p-3">
+                <h6 class="text-muted">Follow-ups</h6>
+                <h2 class="fw-bold text-success">@ViewBag.TotalFollowUps</h2>
+                <small>Scheduled follow-ups</small>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm border-0 p-4 mb-4">
+        <h5 class="fw-bold mb-3">Sales Performance</h5>
+
+        <h3 class="text-success fw-bold">
+            ₹@(((decimal)ViewBag.TotalDealValue).ToString("N2"))
+        </h3>
+
+        <p class="text-muted">
+            Total recorded opportunity deal value
+        </p>
+    </div>
+
+    <div class="card shadow-sm border-0 p-4">
+        <h5 class="fw-bold">Report Information</h5>
+        <p>Report generated on: @ViewBag.GeneratedOn</p>
+        <p>System: AcxiomCRM</p>
+        <p>Status: Successfully generated</p>
+    </div>
+
+</div>
